@@ -4,6 +4,9 @@
  */
 package com.renato.gameoflife;
 
+import java.awt.Color;
+import javax.swing.JButton;
+
 /**
  *
  * @author renat
@@ -13,25 +16,52 @@ public class Cell {
     int positionY;
     boolean isAlive;
     boolean isAliveInNextGen;
+    JButton cellButton; 
+    Game game;
     
     public Cell(){
-        isAlive = true;
+        isAlive = false;
+        cellButton = new JButton();
+        cellButton.setSize(10, 10);
+        cellButton.setOpaque(true);
+        cellButton.setBackground(Color.WHITE);
+        cellButton.addActionListener(e -> this.changeAliveState());
     }
     
-    public void setNextGen(){
+    public Cell(int i, int j, Game game){
+        this();
+        positionX = i;
+        positionY = j;
+        this.game = game;
+    }
+    
+    public void goToNextGen(){
         isAlive = isAliveInNextGen;
+        colorCell();
     }
     
     public void setNextGeneration(int liveNeighbors){
         switch (liveNeighbors){
-            case 0, 1, 4, 5, 6, 7, 8:
-                isAliveInNextGen = false;
-                break;
-            case 3:
-                isAliveInNextGen = true;
-                break;
+            case 0, 1, 4, 5, 6, 7, 8 -> isAliveInNextGen = false;
+            case 2 -> isAliveInNextGen = isAlive;
+            case 3 -> isAliveInNextGen = true;
                 
         }
     }
     
+    
+    public void changeAliveState(){
+        isAlive = !isAlive;
+        colorCell();
+    }
+    
+    private void colorCell(){
+        if (isAlive){
+            cellButton.setBackground(Color.BLACK);
+        }else{
+            cellButton.setBackground(Color.WHITE);
+        }
+        System.out.println("posicao " + positionX + ", " + positionY);
+        System.out.println("vizinhos " + game.contaVizinhos(positionX, positionY));
+    }
 }

@@ -4,17 +4,25 @@
  */
 package com.renato.gameoflife;
 
+import java.awt.GridLayout;
+
 /**
  *
  * @author renat
  */
 public class MainWindow extends javax.swing.JFrame {
 
+    Game game;
     /**
      * Creates new form MainWindow
      */
     public MainWindow() {
         initComponents();
+    }
+    
+    public MainWindow(Game game){
+        this();
+        this.game = game;
     }
 
     /**
@@ -25,61 +33,33 @@ public class MainWindow extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
-        GridPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        gridPanel = new javax.swing.JPanel();
         nexGenButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.GridBagLayout());
+        getContentPane().setLayout(new java.awt.BorderLayout());
 
-        GridPanel.setBackground(new java.awt.Color(0, 0, 0));
+        gridPanel.setBackground(new java.awt.Color(0, 0, 0));
+        gridPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        gridPanel.setMinimumSize(new java.awt.Dimension(50, 50));
+        gridPanel.setLayout(new java.awt.GridLayout(10, 10, 1, 1));
+        getContentPane().add(gridPanel, java.awt.BorderLayout.CENTER);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane1.setViewportView(jTable1);
-
-        javax.swing.GroupLayout GridPanelLayout = new javax.swing.GroupLayout(GridPanel);
-        GridPanel.setLayout(GridPanelLayout);
-        GridPanelLayout.setHorizontalGroup(
-            GridPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(GridPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        GridPanelLayout.setVerticalGroup(
-            GridPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(GridPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        gridBagConstraints.weighty = 0.9;
-        getContentPane().add(GridPanel, gridBagConstraints);
-
-        nexGenButton.setActionCommand("");
         nexGenButton.setLabel("Próxima geração");
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        gridBagConstraints.weighty = 0.1;
-        getContentPane().add(nexGenButton, gridBagConstraints);
+        nexGenButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nexGenButtonActionPerformed(evt);
+            }
+        });
+        getContentPane().add(nexGenButton, java.awt.BorderLayout.SOUTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void nexGenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nexGenButtonActionPerformed
+        game.calculateNextGeneration();
+    }//GEN-LAST:event_nexGenButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -115,11 +95,21 @@ public class MainWindow extends javax.swing.JFrame {
             }
         });
     }
+    
+    //carrega botoes no grid
+    public void populateGrid(){
+        gridPanel.setLayout(new GridLayout(game.gridSize, game.gridSize));
+        for (int i = 0; i < game.gridSize; i++){
+            for (int j = 0; j < game.gridSize; j++){          
+                gridPanel.add(game.grid[i][j].cellButton);
+            }
+        }
+        gridPanel.setSize(10*game.gridSize, 10*game.gridSize);
+        
+    } 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel GridPanel;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JPanel gridPanel;
     private javax.swing.JButton nexGenButton;
     // End of variables declaration//GEN-END:variables
 }

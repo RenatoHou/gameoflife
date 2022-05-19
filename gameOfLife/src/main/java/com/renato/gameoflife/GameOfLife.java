@@ -10,11 +10,16 @@ package com.renato.gameoflife;
  * @author renat
  */
 public class GameOfLife {
-
+    MainWindow window;
+    
     public static void main(String[] args) {
-        MainWindow window = new MainWindow();
+        Game game = new Game(15);
+        
+        MainWindow window = new MainWindow(game);
+        window.populateGrid();
         window.setVisible(true);
-//        Game game = new Game(10);
-//        game.calculateNextGeneration();
+        
+        
+        //game.calculateNextGeneration();
     }
 }
