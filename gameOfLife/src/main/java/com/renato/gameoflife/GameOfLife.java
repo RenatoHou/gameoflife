@@ -5,6 +5,9 @@
 
 package com.renato.gameoflife;
 
+import java.awt.Dimension;
+import javax.swing.JFrame;
+
 /**
  *
  * @author renat
@@ -17,6 +20,9 @@ public class GameOfLife {
         
         MainWindow window = new MainWindow(game);
         window.populateGrid();
+        window.setMaximumSize(new Dimension(1280, 720));
+        window.setSize(25 + game.gridSize * 20 , 100 + game.gridSize*20);
+        
         window.setVisible(true);
         
         

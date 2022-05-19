@@ -62,4 +62,9 @@ public class Cell {
             cellButton.setBackground(Color.WHITE);
         }
     }
+    
+    public void limpar(){
+        isAlive = false;
+        cellButton.setBackground(Color.WHITE);
+    }
 }

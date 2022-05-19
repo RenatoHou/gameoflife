@@ -35,10 +35,11 @@ public class MainWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         gridPanel = new javax.swing.JPanel();
+        bottomPanel = new javax.swing.JPanel();
+        resetButton = new javax.swing.JButton();
         nexGenButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new java.awt.BorderLayout());
 
         gridPanel.setBackground(new java.awt.Color(0, 0, 0));
         gridPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -46,13 +47,23 @@ public class MainWindow extends javax.swing.JFrame {
         gridPanel.setLayout(new java.awt.GridLayout(10, 10, 1, 1));
         getContentPane().add(gridPanel, java.awt.BorderLayout.CENTER);
 
+        resetButton.setLabel("Limpar");
+        resetButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetButtonActionPerformed(evt);
+            }
+        });
+        bottomPanel.add(resetButton);
+
         nexGenButton.setLabel("Próxima geração");
         nexGenButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nexGenButtonActionPerformed(evt);
             }
         });
-        getContentPane().add(nexGenButton, java.awt.BorderLayout.SOUTH);
+        bottomPanel.add(nexGenButton);
+
+        getContentPane().add(bottomPanel, java.awt.BorderLayout.SOUTH);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -60,6 +71,10 @@ public class MainWindow extends javax.swing.JFrame {
     private void nexGenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nexGenButtonActionPerformed
         game.calculateNextGeneration();
     }//GEN-LAST:event_nexGenButtonActionPerformed
+
+    private void resetButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetButtonActionPerformed
+        game.limpar();
+    }//GEN-LAST:event_resetButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -109,7 +124,9 @@ public class MainWindow extends javax.swing.JFrame {
     } 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel bottomPanel;
     private javax.swing.JPanel gridPanel;
     private javax.swing.JButton nexGenButton;
+    private javax.swing.JButton resetButton;
     // End of variables declaration//GEN-END:variables
 }

@@ -43,7 +43,7 @@ public class Game {
         }     
     }
     
-    public int contaVizinhos(int i, int j){
+    private int contaVizinhos(int i, int j){
         int liveNeighbors = 0;
         for (int x = -1; x <= 1; x++){
                     for (int y = -1; y <=1; y++){
@@ -57,5 +57,13 @@ public class Game {
                     }
                 }
         return liveNeighbors;
+    }
+    
+    public void limpar() {
+        for (int i = 0; i < gridSize; i++){
+            for (int j = 0; j < gridSize; j++){          
+                grid[i][j].limpar();
+            }
+        }   
     }
 }
