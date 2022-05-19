@@ -61,7 +61,5 @@ public class Cell {
         }else{
             cellButton.setBackground(Color.WHITE);
         }
-        System.out.println("posicao " + positionX + ", " + positionY);
-        System.out.println("vizinhos " + game.contaVizinhos(positionX, positionY));
     }
 }
